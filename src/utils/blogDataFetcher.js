@@ -1,0 +1,107 @@
+/**
+ * Blog Data Fetcher Utility
+ * Fetches blog data from blogPosts.txt file
+ * This allows editing blog content after build without rebuilding the app
+ */
+
+const CACHE_DURATION = 5 * 60 * 1000; // 5 minutes cache
+let cachedData = null;
+let cacheTimestamp = 0;
+
+/**
+ * Fetches blog data from blogPosts.txt
+ * @returns {Promise<Array>} Array of blog posts
+ */
+export const fetchBlogData = async () => {
+  try {
+    // Check if we have valid cached data
+    const now = Date.now();
+    if (cachedData && (now - cacheTimestamp) < CACHE_DURATION) {
+      return cachedData;
+    }
+
+    // Add cache-busting parameter to ensure fresh data
+    const cacheBuster = `?v=${now}`;
+    const response = await fetch(`/blogPosts.txt${cacheBuster}`);
+    
+    if (!response.ok) {
+      throw new Error(`Failed to fetch blog data: ${response.status} ${response.statusText}`);
+    }
+
+    const textData = await response.text();
+    
+    // Parse JSON data
+    const blogData = JSON.parse(textData);
+    
+    // Validate that we have an array
+    if (!Array.isArray(blogData)) {
+      throw new Error('Blog data is not in expected format');
+    }
+
+    // Cache the data
+    cachedData = blogData;
+    cacheTimestamp = now;
+
+    return blogData;
+  } catch (error) {
+    console.error('Error fetching blog data:', error);
+    
+    // Return fallback data or empty array
+    return [];
+  }
+};
+
+/**
+ * Fetches a specific blog post by ID
+ * @param {string|number} id - Blog post ID
+ * @returns {Promise<Object|null>} Blog post object or null if not found
+ */
+export const fetchBlogPost = async (id) => {
+  try {
+    const blogData = await fetchBlogData();
+    const post = blogData.find(p => String(p.id) === String(id));
+    return post || null;
+  } catch (error) {
+    console.error('Error fetching blog post:', error);
+    return null;
+  }
+};
+
+/**
+ * Clears the cache to force fresh data fetch
+ */
+export const clearBlogCache = () => {
+  cachedData = null;
+  cacheTimestamp = 0;
+};
+
+/**
+ * Gets related posts for a given blog post
+ * @param {Object} post - Blog post object
+ * @returns {Promise<Array>} Array of related blog posts
+ */
+export const getRelatedPosts = async (post) => {
+  try {
+    if (!post || !post.relatedPosts || !Array.isArray(post.relatedPosts)) {
+      return [];
+    }
+
+    const blogData = await fetchBlogData();
+    const related = post.relatedPosts
+      .map(relatedId => blogData.find(p => p.id === relatedId))
+      .filter(Boolean);
+
+    return related;
+  } catch (error) {
+    console.error('Error fetching related posts:', error);
+    return [];
+  }
+};
+
+export default {
+  fetchBlogData,
+  fetchBlogPost,
+  clearBlogCache,
+  getRelatedPosts
+};
+

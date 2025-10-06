@@ -1,0 +1,468 @@
+/* Home.css */
+
+/* Ensure the carousel is relatively positioned */
+.carousel {
+    position: relative;
+}
+
+/* Set maximum height and cover the area without stretching the image */
+.carousel-item img {
+    transform: scale(1); /* Reset any scaling */
+    transition: transform 0.3s ease; /* Smooth transition for any transform changes */
+    object-position: center; /* Adjust as needed to focus on the part of the image that should always be visible */
+}
+/* Diamond.css */
+
+body {
+    background-color: #ffffff;
+}
+
+.text-center.mt-4 {
+    background: #ffffff;
+}
+
+.image-and-text-container,
+.container-step-cut-and-image,
+.image-below-caption {
+    background: #ffffff;
+}
+@keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+  
+  .fade-in {
+    animation: fadeIn 2s ease-in-out;
+  }
+
+/* Responsive adjustments with media queries */
+@media (max-width: 768px) { /* Adjust for tablets */
+    .carousel-item img {
+        height: auto; /* Allow the height to adjust to maintain the image's aspect ratio */
+    }
+}
+
+@media (max-width: 576px) { /* Adjust for mobile phones */
+    .carousel-item img {
+        height: auto; /* Allow the height to adjust to maintain the image's aspect ratio */
+    }
+}
+.carousel, .carousel-inner, .carousel-item {
+    width: 100%;
+    height: auto;  /* Adjust based on the aspect ratio you desire */
+}
+
+/* Ensure the caption is centered and responsive */
+.carousel-caption {
+    /* Change to fixed position */
+    text-align: center;
+    background-color: #ffffff;
+    color: #373533;
+    padding: 1.5rem 0;
+    font-size: 2rem;
+    font-weight: bold;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    font-family: 'ui-sans-serif' /* Set a fixed width (e.g., in pixels) */
+}
+
+
+
+.image-below-caption {
+    display: block;
+    width: 100%;
+    padding: 3rem 0; 
+    background-color: #ffffff;
+    position: relative;
+}
+
+/* Style for images inside the image-below-caption */
+.image-below-caption img {
+    width: 100%;
+    
+    object-fit: cover;
+    display: block;
+    margin: 0 auto;
+    position: relative;
+}
+
+/* Style for left-aligned image inside image-below-caption-left */
+.move-left {
+    margin-left: -60px;
+    margin-top: -50px;
+}
+
+/* Style for right-aligned image inside image-below-caption-left */
+.move-right {
+    margin-left: 10px;
+    margin-top: -50px;
+}
+
+/* Style for left-aligned image inside image-below-caption-left */
+.image-below-caption-left img {
+    max-width: 50%;
+    max-height: 800px;
+    object-fit: cover;
+    margin-left: 3rem;
+    display: block;
+    margin-right: auto;
+    overflow-x: hidden;
+    position: relative;
+}
+
+/* Style for the container with image and text */
+.image-and-text-container {
+    display: flex;
+    background-color: #ffffff;
+    padding: 3rem 0; /* Space above and below the image and text */
+    position: relative;
+}
+
+/* Style for the image container */
+.image-container {
+    flex: 1;
+    padding: 0 3rem; /* Space on the left and right inside the image container */
+    position: relative;
+}
+
+/* Style for the image container with class image-containerr */
+.image-containerr {
+    flex: 0.5;
+    padding: 0 3rem; /* Space on the left and right inside the image container */
+    position: relative;
+}
+
+/* Style for images inside image and text containers */
+.image-container img, .image-containerr img {
+    width: 110%; /* Take up all available width */
+    height: auto;
+    object-fit: cover; /* Maintain aspect ratio */
+    position: relative;
+}
+
+/* Style for the text container */
+.text-container {
+    flex-basis: 50%; /* Slightly increased width */
+    display: flex;
+    justify-content: center; /* Center content horizontally */
+    align-items: center; /* Center content vertically */
+    padding: 0 3rem; /* Padding on left and right */
+    position: relative;
+}
+
+/* Style for the text container with class text-containerr */
+.text-containerr {
+    flex-basis: 60%; /* Slightly increased width */
+    display: flex;
+    justify-content: center; /* Center content horizontally */
+    align-items: center; /* Center content vertically */
+    padding: 0 3rem; /* Padding on left and right */
+    margin-top: -50px; /* Adjust the negative margin to move it up */
+    position: relative;
+}
+
+/* Style for specific text container */
+.specific-text-container {
+    flex-basis: 50%; /* Adjust the width as needed */
+    display: flex;
+    justify-content: center; /* Center content horizontally */
+    align-items: center; /* Center content vertically */
+    padding: 0.5rem 3rem; /* Reduced padding on top and bottom, keep the same horizontal padding */
+    margin-bottom: 15px;
+    margin-left: 20px;
+    position: relative;
+}
+
+/* Style for text content */
+.text-content {
+    background: #ffffff; /* White background */
+    color: #2d2d2d; /* Dark grey text color */
+    padding: 2rem; /* Padding inside the text content */
+    width: 100%; /* Full width of the text container */
+    box-sizing: border-box; /* Include padding in width calculation */
+    height: 100%; /* Full height to match the image container */
+    text-align: center; 
+    font-family: 'ui-sans-serif'
+}
+
+.text-content h2 {
+    margin-bottom: 1rem; /* Space below the heading */
+}
+
+.text-content p {
+    margin-bottom: 2rem; /* Space below the paragraph */
+}
+
+.text-content button {
+    background-color: #ffffff; /* White background for the button */
+    color: black; /* Black text color for the button */
+    border: none; /* No border */
+    padding: 0.5rem 1rem; /* Padding inside the button */
+    cursor: pointer; /* Pointer cursor on hover */
+}
+
+/* Style for step-cut container */
+.step-cut-container {
+    display: flex;
+    background-color: #ffffff;
+    padding: 3rem 0;
+}
+
+/* Style for the image container inside step-cut container */
+.step-cut-container .image-container {
+    flex-basis: 50%;
+    padding: 0 3rem;
+    position: relative;
+}
+
+/* Style for images inside the step-cut container */
+.step-cut-container .image-container img {
+    width: 110%;
+    height: auto;
+    object-fit: cover;
+    position: relative;
+}
+
+/* Style for the text container inside step-cut container */
+.step-cut-container .text-container {
+    flex-basis: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start; /* Align text to the left */
+    padding: 0 3rem;
+    position: relative;
+}
+
+/* Style for text content inside step-cut container */
+.step-cut-container .text-content {
+    background: #ffffff;
+    color: #2d2d2d;
+    padding: 2rem;
+    width: 100%;
+    box-sizing: border-box;
+    height: 100%;
+    text-align: center;
+    position: relative;
+    font-family: 'ui-sans-serif'
+}
+
+.step-cut-container .text-content h2 {
+    margin-bottom: 1rem;
+}
+
+.step-cut-container .text-content p {
+    margin-bottom: 2rem;
+}
+
+.step-cut-container .text-content button {
+    background-color: #ffffff;
+    color: black;
+    border: none;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+}
+
+/* Add responsive design as needed */
+
+/* For any screen size, it should be fixed and not change */
+
+
+/* Home.css */
+
+/* ... rest of your CSS ... */
+
+.grey-background-text-container {
+    background-color: #ffffff; /* Or any grey color you prefer */
+    color: #ffffff; /* White text color */
+    text-align: center; /* Center the text */
+    padding: 2rem; /* Add some padding */
+  }
+  
+  .grey-background-text-container h2 {
+    margin-bottom: 0.5rem; /* Space below the heading */
+  }
+  
+  .grey-background-text-container p {
+    margin-bottom: 1rem; /* Space below the paragraph */
+  }
+  .the-heading {
+    font-size: 40px;
+    text-align: center;
+    color: #ffffff;
+    margin: 0 auto;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    width: 100%;
+    font-family: auto
+  }
+  .journey-heading {
+    font-size: 50px; /* Or any size you prefer */
+    font-family: 'Georgia', serif; /* This is just an example, choose any font you like */
+    /* Add more styling as needed */
+  }
+  .Welcome-heading{
+     /* Or any size you prefer */
+    font-family: 'Georgia', serif; /* This is just an example, choose any font you like */
+    /* Add more styling as needed */
+
+  }
+
+  @media (max-width: 576px) {
+    .step-cut-container,
+    .text-and-image-container,
+    .image-and-text-container {
+        flex-direction: column;
+        align-items: center; /* Center the items since they are now stacked */
+    }
+
+    .image-container img,
+    .image-containerr img,
+    .step-cut-container .image-container img,
+    .image-below-caption img,
+    .move-left,
+    .move-right {
+        width: 100%; /* Full width */
+        max-width: 100%; /* Override any other max-width settings */
+        height: auto; /* Maintain aspect ratio */
+        object-fit: scale-down; /* Fit the image within the container */
+        margin: 0; /* Remove any negative margins */
+    }
+
+    .text-container,
+    .text-containerr,
+    .specific-text-container {
+        width: 100%; /* Allow text containers to fill their container */
+        padding: 1rem; /* Adjust padding */
+        box-sizing: border-box; /* Include padding in the width calculation */
+    }
+
+    .carousel-caption {
+        position: static; /* Allow the caption to flow naturally */
+        width: auto; /* Let the caption take up the necessary width */
+        padding: 1rem; /* Adjust padding */
+        font-size: 1.2rem; /* Adjust font size for smaller screens */
+    }
+
+    .text-content {
+        text-align: center; 
+      
+    }
+
+    /* Adjust button styling for smaller screens */
+    .text-content button {
+        width: auto; /* Let the button width be content-dependent */
+        padding: 0.5rem 1rem; /* Adjust padding */
+    }
+
+    /* You may need to adjust the grey background container as well */
+    .grey-background-text-container {
+        padding: 1rem; /* Adjust padding for smaller screens */
+    }
+    .main-header {
+        background-color: #fff; /* Adjust the color to match your brand */
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+    
+    .main-header .container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    
+    .main-header nav ul {
+        display: flex;
+        padding: 0;
+        margin: 0;
+        list-style: none;
+    }
+    
+    .main-header nav a {
+        color: #333; /* Dark grey text */
+        text-decoration: none;
+        font-weight: bold;
+        padding: 0 15px;
+        text-transform: uppercase;
+    }
+    
+    .main-header nav a:hover {
+        color: #000;
+        text-decoration: underline;
+    }
+    
+    .logo img {
+        height: 50px; /* Adjust size as per your requirement */
+    }
+    .main-header {
+    background-color: #FFF; /* White background */
+    padding: 10px 0;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.main-header .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.main-header a {
+    margin: 0 15px;
+    text-decoration: none;
+    color: #000; /* Black text for better contrast */
+    font-weight: bold;
+}
+
+.logo-center img {
+    height: 50px; /* Adjust based on your logo's aspect ratio */
+}
+
+.left-nav, .right-nav {
+    display: flex;
+}
+
+/* Responsive tweaks might be needed here */
+@media (max-width: 768px) {
+    .left-nav, .right-nav {
+        display: none; /* Optionally hide navigation on smaller screens */
+    }
+
+    .main-header .container {
+        justify-content: center; /* Center logo on smaller screens */
+    }
+}
+element.style {
+    background: white;
+}
+@media (min-width: 1024px) {
+    .carousel-item img {
+        height: 600px; /* Adjust height for larger screens */
+    }
+}
+
+@media (max-width: 768px) {
+    .carousel-item img {
+        height: 400px; /* Adjust height for tablets */
+    }
+}
+
+@media (max-width: 576px) {
+    .carousel-item img {
+        height: 300px; /* Adjust height for mobile devices */
+    }
+}
+
+}
+
+
+
+  
+
+
+  
+  

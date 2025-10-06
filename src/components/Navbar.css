@@ -1,0 +1,91 @@
+
+
+.main-logo {
+  height: 150px;
+  margin-top: 40px;
+}
+
+.second-logo {
+  height: auto;
+  margin-top: 30px;
+}
+/* Overlay menu style for mobile devices */
+@media (max-width: 576px) {
+  .navbar-collapse {
+    position: fixed;  /* Makes the navbar fixed */
+    top: 0;  /* Start from top */
+    left: 0;  /* Start from left side */
+    width: 100%;  /* Full width */
+    height: 100%;  /* Full height */
+    background-color: rgba(0, 0, 0, 0.9); /* Semi-transparent black */
+    z-index: 1050;  /* Ensures it is above other content */
+    overflow-y: auto;  /* Allows scrolling */
+    display: flex;  /* Enables the use of Flexbox */
+    flex-direction: column;  /* Stacks items vertically */
+    justify-content: center;  /* Centers items vertically */
+    padding-top: 20px;  /* Gives some space at the top */
+  }
+
+  .navbar-toggler {
+    z-index: 1051;  /* Ensures the toggler is above the overlay */
+  }
+
+  .nav-link {
+    color: #000000;  /* White color for links */
+    text-align: center;  /* Center alignment of links */
+    padding: 10px;  /* Bigger touch targets */
+    border: none;  /* No borders between links */
+  }
+}
+
+
+@media (max-width: 576px) {
+  .main-logo {
+    height: 100px;
+    margin-top: 20px;
+  }
+
+  .second-logo {
+    height: 50px;
+    margin-top: 15px;
+  }
+
+  .nav-item {
+    margin: 0 5px;
+    border-right: none !important;
+  }
+
+  .nav-link {
+    font-size: 0.8rem !important;
+  }
+
+  .navbar-nav {
+    flex-direction: column;
+  }
+
+  .navbar-collapse {
+    justify-content: start !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .main-logo {
+    height: 120px;
+    margin-top: 30px;
+  }
+
+  .second-logo {
+    height: 60px;
+    margin-top: 20px;
+  }
+
+  .nav-item {
+    margin: 0 10px;
+  }
+
+  .nav-link {
+    font-size: 0.9rem;
+  }
+}
+
+

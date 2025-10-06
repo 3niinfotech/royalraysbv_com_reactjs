@@ -1,0 +1,24 @@
+.container {
+    background-color: #333; /* Dark background color */
+    color: #f1f1f8; /* Light text color */
+    max-width: 800px; /* Max width of the content */
+    margin: auto; /* Center the container */
+    padding: 50px; /* Padding inside the container */
+    border-radius: 5px; /* Rounded corners */
+  }
+  
+  .text-uppercase {
+    letter-spacing: 1px; /* Spacing between letters for the uppercase styling */
+  }
+  
+  .text-muted {
+    color: #aaa; /* Muted text color for the paragraph */
+  }
+  .journey-container,
+.journey-container h1,
+.journey-container h2,
+.journey-container h3,
+.journey-container h5,
+.journey-container p {
+    font-family: inherit;
+}

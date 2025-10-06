@@ -1,0 +1,248 @@
+.history-container {
+    padding: 20px;
+    font-family: 'ui-sans-serif', sans-serif;
+    background-color: #ffffff;
+    animation: fadeIn 1.5s ease-in-out;
+  }
+  
+  .top-image-container {
+    text-align: center;
+    margin-bottom: 20px;
+    animation: fadeIn 2s ease-in-out;
+  }
+  
+  .top-image {
+    width: 100%;
+    height: auto;
+  }
+  
+  .logo-section {
+    text-align: center;
+    background-color: #ffffff;
+    padding: 40px 20px;
+    margin-bottom: 40px;
+    animation: fadeInUp 1.5s ease-in-out;
+  }
+  
+  .logo {
+    height: 150px;
+    margin-top: 40px;
+  }
+  
+  .logo-content {
+    font-size: 18px;
+    line-height: 1.6;
+    margin-top: 20px;
+    display: inline-block;
+    font-family: 'ui-sans-serif';
+    text-align: left;
+  }
+  
+  .journey-section {
+    text-align: center;
+    margin: 40px 0;
+    animation: fadeInUp 1.5s ease-in-out;
+  }
+  
+  .timeline-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+  }
+  
+  .timeline {
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+    max-width: 1200px;
+    margin: 20px 0;
+    padding: 10px 0;
+    border-bottom: 2px solid #ccc;
+  }
+  
+  .timeline-item {
+    cursor: pointer;
+    padding: 10px 20px;
+    font-size: 18px;
+    font-weight: bold;
+    color: #bfc7d0;
+    transition: background-color 0.3s ease;
+    animation: fadeIn 1s ease-in-out;
+  }
+  
+  .timeline-item.selected,
+  .timeline-item:hover {
+    background-color: #a7abaf;
+    color: #fff;
+    border-radius: 4px;
+  }
+  
+  .timeline-content {
+    margin-top: 20px;
+    animation: fadeIn 1.5s ease-in-out;
+  }
+  
+  .timeline-item-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    text-align: left;
+    gap: 20px;
+    font-family: 'ui-sans-serif', sans-serif; 
+    animation: fadeIn 1s ease-in-out;
+  }
+  
+  .timeline-item-content .content {
+    flex: 1;
+    
+    text-align: center; 
+    font-family: 'ui-sans-serif', sans-serif; 
+  }
+  
+  .timeline-item-content .image {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    animation: slideInRight 1.5s ease-in-out;
+  }
+  
+  .timeline-item-content img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 10px;
+  }
+  
+  .journey-title {
+    font-size: 36px;
+    font-family: 'ui-sans-serif'; 
+    margin-bottom: 10px;
+    animation: fadeInUp 1.5s ease-in-out;
+  }
+  
+  .journey-tagline {
+    font-size: 24px;
+    font-family: ui-sans-serif; /* Change this to the desired font */
+    margin-bottom: 20px;
+    color: #555; /* Optional: Change color if needed */
+    animation: fadeInUp 1.5s ease-in-out;
+  }
+  
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+  
+  @keyframes slideInLeft {
+    from {
+      transform: translateX(-100%);
+      opacity: 0;
+    }
+    to {
+      transform: translateX(0);
+      opacity: 1;
+    }
+  }
+  
+  @keyframes slideInRight {
+    from {
+      transform: translateX(100%);
+      opacity: 0;
+    }
+    to {
+      transform: translateX(0);
+      opacity: 1;
+    }
+  }
+  
+  @keyframes fadeInUp {
+    from {
+      transform: translateY(20px);
+      opacity: 0;
+    }
+    to {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+  .timeline-item-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    text-align: left;
+    font-family: 'ui-sans-serif', sans-serif; 
+    gap: 20px;
+    animation: fadeIn 1s ease-in-out;
+  }
+  
+  .timeline-item-content .content {
+    flex: 1;
+    text-align: center; 
+    font-family: 'ui-sans-serif', sans-serif; 
+  }
+  
+  .timeline-item-content .content h3 {
+    font-size: 24px;
+    margin-bottom: 10px;
+    font-family: 'ui-sans-serif';
+  }
+  
+  .timeline-item-content .content p {
+    font-size: 18px;
+    font-family: 'ui-sans-serif';
+  line-height: 1.6;
+ 
+  margin: 0;
+  }
+  
+  .timeline-item-content .image {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .timeline-item-content .image img {
+    max-width: 100%;
+  height: auto;
+  border-radius: 10px;
+  }
+  
+  /* Keyframes for animations */
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+  
+  @keyframes slideInLeft {
+    from {
+      transform: translateX(-100%);
+      opacity: 0;
+    }
+    to {
+      transform: translateX(0);
+      opacity: 1;
+    }
+  }
+  
+  @keyframes slideInRight {
+    from {
+      transform: translateX(100%);
+      opacity: 0;
+    }
+    to {
+      transform: translateX(0);
+      opacity: 1;
+    }
+  }
+  

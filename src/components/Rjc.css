@@ -1,0 +1,17 @@
+.zoom-on-hover {
+    overflow: hidden; /* Prevents the image from overflowing its container */
+  }
+  
+  .zoom-on-hover img {
+    transition: transform 0.5s ease; /* Smooth transition for the zoom effect */
+  }
+  
+  .zoom-on-hover img:hover {
+    transform: scale(1.1); /* Scales the image to 110% of its size */
+  }
+.rjc-container,
+.rjc-container h2,
+.rjc-container p {
+    font-family: 'monospace';
+    font-size: large;
+}

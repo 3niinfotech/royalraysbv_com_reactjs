@@ -1,0 +1,117 @@
+.footer {
+  background: linear-gradient(45deg, #4d5052, #000000);
+  color: #fff;
+  padding: 10px 0;
+  font-family: ui-sans-serif;
+  text-align: center;
+  box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
+  position: relative;
+  overflow: hidden;
+}
+
+.footer-content {
+  display: flex;
+  justify-content: space-between; /* Ensures equal spacing between columns */
+  align-items: flex-start; /* Aligns items to the top */
+  flex-wrap: wrap;
+  animation: fadeIn 2s;
+}
+
+.footer-column {
+  flex: 1;
+  margin: 10px;
+  animation: slideIn 1s ease-out;
+}
+
+.footer-column h4 {
+  margin-bottom: 8px;
+  color: white !important;
+    font-size: 1.3em; /* Increased font size */
+    font-weight: bold;
+}
+
+.footer-column p, .footer-column a {
+  margin: 3px 0;
+  color: #fff;
+  text-decoration: none;
+  font-family: ui-sans-serif;
+  font-size: 1em; /* Increased font size */
+}
+
+.footer-column a:hover {
+  color: #d8d0b1;
+}
+
+.logo-right {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  flex: 1;
+}
+
+.center-column {
+  text-align: center;
+}
+
+.social-icons {
+  margin-top: 5px; /* Reduced margin */
+}
+
+.social-icons a {
+  margin: 0 8px;
+  color: #fff;
+  font-size: 1.6em; /* Increased icon size */
+  transition: transform 0.3s, color 0.3s;
+}
+
+.social-icons a:hover {
+  transform: scale(1.2);
+  color: #9f9d92;
+}
+
+@keyframes slideIn {
+  from {
+      transform: translateY(50px);
+      opacity: 0;
+  }
+  to {
+      transform: translateY(0);
+      opacity: 1;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+      opacity: 0;
+  }
+  to {
+      opacity: 1;
+  }
+}
+
+/* Background animation */
+.footer::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(255,255,255,0.1) 25%, rgba(0,0,0,0) 70%);
+  animation: rotate 10s linear infinite;
+  z-index: 0;
+}
+
+@keyframes rotate {
+  from {
+      transform: rotate(0deg);
+  }
+  to {
+      transform: rotate(360deg);
+  }
+}
+
+.footer-content > * {
+  position: relative;
+  z-index: 1;
+}
