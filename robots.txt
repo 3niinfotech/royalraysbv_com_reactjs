@@ -1,0 +1,12 @@
+# Robots.txt for https://www.royalraysbv.com/
+# This file tells search engines how to crawl and index your website.
+
+User-agent: *
+Allow: /
+
+# Disallow URLs (add here if needed, e.g., admin pages)
+# Disallow: /admin/
+# Disallow: /cart/
+
+# Sitemap location
+Sitemap: https://www.royalraysbv.com/sitemap.xml

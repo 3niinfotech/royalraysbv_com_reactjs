@@ -34,7 +34,7 @@ const Footer = () => {
           <h4>FIND US</h4>
           <div className="social-icons">
             <a href="https://www.instagram.com/royalraysbv" target="_blank" rel="noopener noreferrer"><i className="fab fa-instagram"></i></a>
-            <a href="https://www.linkedin.com/in/royal-rays-bv-665417298/" target="_blank" rel="noopener noreferrer"><i className="fab fa-linkedin-in"></i></a>
+            <a href="https://www.linkedin.com/company/royalraysbv" target="_blank" rel="noopener noreferrer"><i className="fab fa-linkedin-in"></i></a>
             <a href="https://twitter.com/royalraysbv" target="_blank" rel="noopener noreferrer"><i className="fab fa-twitter"></i></a>
             <a href="https://wa.me/917045356688" target="_blank" rel="noopener noreferrer"><i className="fab fa-whatsapp"></i></a>
             <a href="skype:hirenmoradia?chat"><i className="fab fa-skype"></i></a>
