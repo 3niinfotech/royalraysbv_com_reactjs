@@ -5,6 +5,142 @@ import { fetchBlogPost, getRelatedPosts } from '../utils/blogDataFetcher';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './BlogDetail.css';
 
+
+const formatPlainTextToHTML = (text) => {
+  if (!text) return '';
+  
+  // Agar pehle se HTML hai (starts with <), to as-is return karo
+  if (typeof text === 'string' && text.trim().startsWith('<')) {
+    return text;
+  }
+  
+  // Plain text ko HTML mein convert karo
+  // Double newline se paragraphs banaye
+  const sections = text.split(/\n\s*\n/).filter(s => s.trim());
+  
+  let html = '';
+  let inList = false;
+  
+  sections.forEach((section, index) => {
+    const lines = section.split('\n').map(l => l.trim()).filter(l => l);
+    
+    lines.forEach((line, lineIndex) => {
+      // Check for headings - improved detection
+      // Headings: short lines (< 100 chars), often title case, might end with ?, or standalone
+      const isLikelyHeading = line.length < 100 && 
+        (line === line.toUpperCase() || 
+         line.match(/^[A-Z][^.!?]*[?:]?$/) || 
+         line.length < 60 ||
+         (lineIndex === 0 && line.length < 80));
+      
+      if (isLikelyHeading && !line.match(/^[-*•]\s/) && !line.match(/^\d+[\.)]\s/)) {
+        if (inList) {
+          html += '</ul>';
+          inList = false;
+        }
+        // Remove colon if present, but keep other punctuation
+        const headingText = line.replace(/:$/, '').trim();
+        html += `<h2>${escapeHtml(headingText)}</h2>`;
+        return;
+      }
+      
+      // Check for bullet points
+      if (line.match(/^[-*•]\s/) || line.match(/^\d+[\.)]\s/)) {
+        if (!inList) {
+          html += '<ul>';
+          inList = true;
+        }
+        const listItem = line.replace(/^[-*•]\s|^\d+[\.)]\s/, '').trim();
+        html += `<li>${escapeHtml(listItem)}</li>`;
+        return;
+      }
+      
+      // Regular paragraph
+      if (inList) {
+        html += '</ul>';
+        inList = false;
+      }
+      
+      // Escape HTML characters but preserve formatting
+      const escaped = escapeHtml(line);
+      html += `<p>${escaped}</p>`;
+    });
+  });
+  
+  if (inList) {
+    html += '</ul>';
+  }
+  
+  return html;
+};
+
+// HTML characters ko escape karne ke liye helper function
+const escapeHtml = (text) => {
+  if (typeof text !== 'string') return '';
+  const map = {
+    '&': '&amp;',
+    '<': '&lt;',
+    '>': '&gt;',
+    '"': '&quot;',
+    "'": '&#039;'
+  };
+  return text.replace(/[&<>"']/g, m => map[m]);
+};
+
+// Main function jo sab formats handle karega
+const formatContent = (content) => {
+  if (!content) return '';
+  
+  // Agar array format hai (type, text structure)
+  if (Array.isArray(content)) {
+    let html = '';
+    content.forEach((item) => {
+      if (!item || !item.type) return;
+      
+      switch(item.type) {
+        case 'heading':
+          html += `<h2>${escapeHtml(item.text || '')}</h2>`;
+          break;
+        case 'subheading':
+          html += `<h3>${escapeHtml(item.text || '')}</h3>`;
+          break;
+        case 'paragraph':
+          html += `<p>${escapeHtml(item.text || '')}</p>`;
+          break;
+        case 'list':
+          if (item.items && Array.isArray(item.items)) {
+            html += '<ul>';
+            item.items.forEach(itemText => {
+              html += `<li>${escapeHtml(itemText || '')}</li>`;
+            });
+            html += '</ul>';
+          }
+          break;
+        case 'cta':
+          html += `<p class="cta-text"><strong>${escapeHtml(item.text || '')}</strong></p>`;
+          break;
+        default:
+          if (item.text) {
+            html += `<p>${escapeHtml(item.text)}</p>`;
+          }
+      }
+    });
+    return html;
+  }
+  
+  // Agar string hai
+  if (typeof content === 'string') {
+    // Agar pehle se HTML hai (starts with <), to as-is return karo
+    if (content.trim().startsWith('<')) {
+      return content;
+    }
+    // Plain text ko HTML mein convert karo
+    return formatPlainTextToHTML(content);
+  }
+  
+  return '';
+};
+
 function BlogDetail() {
   const { id } = useParams();
   const [blogPost, setBlogPost] = useState(null);
@@ -92,14 +228,18 @@ function BlogDetail() {
                 <div className="post-meta d-flex flex-column flex-md-row justify-content-between align-items-start align-items-md-center gap-2 gap-md-3">
                   <div className="author-info d-flex align-items-center gap-2 gap-md-3">
                     <img
-                      src={blogPost.author.image}
-                      alt={blogPost.author.name}
+                      src={typeof blogPost.author === 'object' ? (blogPost.author?.image || 'https://royalraysbv.com/RRLOGO.png') : 'https://royalraysbv.com/RRLOGO.png'}
+                      alt={typeof blogPost.author === 'object' ? blogPost.author?.name : blogPost.author || 'Royal Rays'}
                       className="author-avatar rounded-circle"
                       style={{ width: '50px', height: '50px', objectFit: 'cover' }}
+                      onError={(e) => {
+                        e.target.src = 'https://royalraysbv.com/RRLOGO.png';
+                        e.target.style.objectFit = 'contain';
+                      }}
                     />
                     <div>
-                      <p className="author-name mb-0 mb-md-1 fw-semibold">By {blogPost.author.name}</p>
-                      <p className="mb-0 text-muted small">{blogPost.date} • {blogPost.readTime}</p>
+                      <p className="author-name mb-0 mb-md-1 fw-semibold">By {typeof blogPost.author === 'object' ? blogPost.author.name : blogPost.author || 'Royal Rays'}</p>
+                      <p className="mb-0 text-muted small">{blogPost.date} • {blogPost.readTime || 'N/A'}</p>
                     </div>
                   </div>
 
@@ -135,7 +275,9 @@ function BlogDetail() {
               <div
                 className="article-content mt-3 mt-md-4"
                 style={{ lineHeight: '1.8' }}
-                dangerouslySetInnerHTML={{ __html: blogPost.content }}
+                dangerouslySetInnerHTML={{ 
+                  __html: formatContent(blogPost.content)
+                }}
               />
             </article>
           </motion.div>
@@ -156,17 +298,17 @@ function BlogDetail() {
                 <div className="sidebar-card-body">
                   <div className="author-profile text-center">
                     <img
-                      src={blogPost.author.image}
-                      alt={blogPost.author.name}
+                      src={typeof blogPost.author === 'object' ? (blogPost.author?.image || 'https://royalraysbv.com/RRLOGO.png') : 'https://royalraysbv.com/RRLOGO.png'}
+                      alt={typeof blogPost.author === 'object' ? blogPost.author?.name : blogPost.author || 'Royal Rays'}
                       className="author-avatar rounded-circle mb-2 mb-md-3"
                       style={{ width: '70px', height: '70px', objectFit: 'cover' }}
                       onError={(e) => {
-                        e.target.src = '/fallback-avatar.jpg';
+                        e.target.src = 'https://royalraysbv.com/RRLOGO.png';
                         e.target.style.objectFit = 'contain';
                       }}
                     />
-                    <h5 className="author-name mb-1 mb-md-2">{blogPost.author.name}</h5>
-                    <p className="author-bio text-muted mb-0 small">{blogPost.author.bio}</p>
+                    <h5 className="author-name mb-1 mb-md-2">{typeof blogPost.author === 'object' ? blogPost.author?.name : blogPost.author || 'Royal Rays'}</h5>
+                    <p className="author-bio text-muted mb-0 small">{typeof blogPost.author === 'object' ? (blogPost.author?.bio || 'Expert diamond specialists with decades of combined experience in the diamond industry.') : 'Expert diamond specialists with decades of combined experience in the diamond industry.'}</p>
                   </div>
                 </div>
               </motion.div>
