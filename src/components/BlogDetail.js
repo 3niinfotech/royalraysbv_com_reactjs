@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { fetchBlogPost, getRelatedPosts } from '../utils/blogDataFetcher';
+import { fetchBlogPost, getRelatedPosts, generateSlug } from '../utils/blogDataFetcher';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './BlogDetail.css';
 
@@ -142,7 +142,7 @@ const formatContent = (content) => {
 };
 
 function BlogDetail() {
-  const { id } = useParams();
+  const { slug } = useParams();
   const [blogPost, setBlogPost] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -152,7 +152,7 @@ function BlogDetail() {
     const loadBlogPost = async () => {
       try {
         setLoading(true);
-        const post = await fetchBlogPost(id);
+        const post = await fetchBlogPost(slug);
 
         if (!post) {
           throw new Error('Blog post not found');
@@ -172,7 +172,7 @@ function BlogDetail() {
     };
 
     loadBlogPost();
-  }, [id]);
+  }, [slug]);
 
   if (loading) {
     return (
@@ -329,7 +329,7 @@ function BlogDetail() {
                           className="mb-2 mb-md-3 pb-2 pb-md-3 border-bottom"
                         >
                           <Link
-                            to={`/blog/${post.id}`}
+                            to={`/blog/${generateSlug(post.title)}`}
                             className="related-post text-decoration-none text-dark"
                           >
                             <div className="d-flex align-items-center gap-2 gap-md-3">

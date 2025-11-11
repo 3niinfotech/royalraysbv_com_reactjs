@@ -45,7 +45,7 @@ function App() {
           {/* <Route path="/experts" element={<Expert />} /> */}
           <Route path="/history" element={<History />} />
           <Route path="/blog" element={<Blogs />} />
-          <Route path="/blog/:id" element={<BlogDetail />} />
+          <Route path="/blog/:slug" element={<BlogDetail />} />
           {/* <Route path="/compliances" element={<Compliances />} /> */}
 
         </Routes>

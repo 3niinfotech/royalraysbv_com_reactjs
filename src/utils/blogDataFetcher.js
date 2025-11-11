@@ -9,6 +9,25 @@ let cachedData = null;
 let cacheTimestamp = 0;
 
 /**
+ * Generates a URL-friendly slug from a title
+ * @param {string} title - Blog post title
+ * @returns {string} URL-friendly slug
+ */
+export const generateSlug = (title) => {
+  if (!title) return '';
+  // Take only the main title part (before colon if present)
+  const mainTitle = title.split(':')[0].trim();
+  // Convert to title case and replace spaces with hyphens
+  return mainTitle
+    .replace(/[^\w\s-]/g, '') // Remove special characters
+    .split(/\s+/)
+    .map(word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
+    .join('-')
+    .replace(/-+/g, '-') // Replace multiple hyphens with single hyphen
+    .replace(/^-+|-+$/g, ''); // Remove leading/trailing hyphens
+};
+
+/**
  * Fetches blog data from blogPosts.txt
  * @returns {Promise<Array>} Array of blog posts
  */
@@ -52,14 +71,18 @@ export const fetchBlogData = async () => {
 };
 
 /**
- * Fetches a specific blog post by ID
- * @param {string|number} id - Blog post ID
+ * Fetches a specific blog post by slug
+ * @param {string} slug - Blog post slug
  * @returns {Promise<Object|null>} Blog post object or null if not found
  */
-export const fetchBlogPost = async (id) => {
+export const fetchBlogPost = async (slug) => {
   try {
     const blogData = await fetchBlogData();
-    const post = blogData.find(p => String(p.id) === String(id));
+    // Find post by matching slug generated from title
+    const post = blogData.find(p => {
+      const postSlug = generateSlug(p.title);
+      return postSlug === slug;
+    });
     return post || null;
   } catch (error) {
     console.error('Error fetching blog post:', error);
@@ -102,6 +125,7 @@ export default {
   fetchBlogData,
   fetchBlogPost,
   clearBlogCache,
-  getRelatedPosts
+  getRelatedPosts,
+  generateSlug
 };
 

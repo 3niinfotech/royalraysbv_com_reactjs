@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { fetchBlogData } from '../utils/blogDataFetcher';
+import { fetchBlogData, generateSlug } from '../utils/blogDataFetcher';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './Blogs.css';
 
@@ -92,7 +92,7 @@ function Blogs() {
                                     <p className="blog-excerpt">{post.excerpt}</p>
                                     <div className="blog-footer">
                                         <span className="blog-author">By {post.author?.name || post.author}</span>
-                                        <Link to={`/blog/${post.id}`} className="learn-more-btn">
+                                        <Link to={`/blog/${generateSlug(post.title)}`} className="learn-more-btn">
                                             Read Article <i className="fas fa-arrow-right"></i>
                                         </Link>
                                     </div>
